@@ -1,17 +1,16 @@
 from rest_framework import serializers
-from rest_framework import generics
 from rest_framework.validators import UniqueValidator
 from . import models
 from django.contrib.auth.password_validation import validate_password
 
 
-class UserSerializers(serializers.ModelSerializer):
+class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.User
         fields = ['first_name', 'last_name', 'username', 'email', 'password']
 
 
-class RegistrationSerializer(generics.CreateAPIView):
+class RegistrationSerializer(serializers.ModelSerializer):
     email = serializers.EmailField(
         required=True,
         validators=[UniqueValidator(queryset=models.User.objects.all())]
@@ -22,26 +21,25 @@ class RegistrationSerializer(generics.CreateAPIView):
 
     class Meta:
         model = models.User
-        fields = ['username', 'password', 'password_retry', 'email', 'first_name', 'last_name']
+        fields = ['first_name', 'last_name', 'username', 'password', 'password_retry', 'email']
         extra_kwargs = {
             'first_name': {'required': True},
             'last_name': {'required': True}
         }
 
-        def validate(self, attrs):
-            if attrs['password'] != attrs['password_retry']:
-                raise serializers.ValidationError({'password': "Password fields didn't match"})
-            return attrs
+    def validate(self, attrs):
+        if attrs['password'] != attrs['password_retry']:
+            raise serializers.ValidationError({'password': "Password fields didn't match"})
+        return attrs
 
-        def create(self, validated_data):
-            user = models.User.objects.create(
-                username=validated_data['username'],
-                email=validated_data['email'],
-                first_name=validated_data['first_name'],
-                last_name=validated_data['last_name']
-            )
+    def create(self, validated_data):
+        user = models.User.objects.create_user(username=validated_data['username'],
+                                               email=validated_data['email'],
+                                               first_name=validated_data['first_name'],
+                                               last_name=validated_data['last_name'])
 
-            user.set_password(validated_data['password'])
-            user.save()
+        user.set_password(validated_data['password'])
+        user.save()
 
-            return user
+        return user
+
