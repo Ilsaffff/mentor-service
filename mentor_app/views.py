@@ -15,3 +15,8 @@ class RegistrationView(generics.CreateAPIView):
     queryset = models.User.objects.all()
     serializer_class = serializers.RegistrationSerializer
     permission_classes = (AllowAny,)
+
+
+class OnboardingView(generics.ListAPIView):
+    queryset = models.Module.objects.all()
+    serializer_class = serializers.OnboardingSerializer

@@ -43,3 +43,8 @@ class RegistrationSerializer(serializers.ModelSerializer):
 
         return user
 
+
+class OnboardingSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Module
+        fields = '__all__'

@@ -1,11 +1,18 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django_enum import EnumField
-from . import enums
+
+
+class GradeEnum(models.TextChoices):
+    JUNIOR = 'Junior'
+    JUNIOR_PLUS = 'Junior+'
+    MIDDLE = 'Middle'
+    MIDDLE_PLUS = 'Middle+'
+    SENIOR = 'Senior'
 
 
 class User(AbstractUser):
-    grade = EnumField(enums.GradeEnum, null=True, default=None)
+    grade = EnumField(GradeEnum, null=True, default=None)
 
     def __str__(self):
         return self.username
