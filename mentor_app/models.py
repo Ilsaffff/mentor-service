@@ -27,7 +27,7 @@ class Area(models.Model):
 
 class Module(models.Model):
     name = models.CharField(max_length=100)
-    grade = EnumField(enums.GradeEnum, null=True, default=None)
+    grade = EnumField(GradeEnum, null=True, default=None)
 
     area = models.ForeignKey(Area, on_delete=models.CASCADE, null=True)
 
