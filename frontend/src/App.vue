@@ -6,7 +6,7 @@
       dark
     >
       <div class="d-flex align-center">
-        <div class="text-sm-h4">uppoint</div>
+        <span class="text-h4" style="width: 100%;text-align: center">uppoint</span>
       </div>
 
       <v-spacer></v-spacer>
@@ -22,7 +22,7 @@
 <script>
 
 
-import Registration from "@/components/Registration.vue";
+import Registration from "@/components/pages/Registration.vue";
 
 export default {
   name: 'App',

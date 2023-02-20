@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'djoser',
     'corsheaders',
+    'frontend'
 ]
 
 MIDDLEWARE = [
@@ -86,6 +87,11 @@ DATABASES = {
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
+
+CORS_ORIGIN_WHITELIST = (
+    'localhost:8080',
+    'localhost',
+)
 
 AUTH_PASSWORD_VALIDATORS = [
     {
