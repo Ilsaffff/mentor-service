@@ -1,5 +1,5 @@
 from rest_framework.viewsets import ModelViewSet
-from rest_framework.permissions import IsAuthenticated, AllowAny
+from rest_framework.permissions import IsAuthenticated, AllowAny, IsAuthenticatedOrReadOnly
 from . import models
 from . import serializers
 from rest_framework import generics
@@ -20,3 +20,4 @@ class RegistrationView(generics.CreateAPIView):
 class OnboardingView(generics.ListAPIView):
     queryset = models.Module.objects.all()
     serializer_class = serializers.OnboardingSerializer
+    permission_classes = (IsAuthenticated,)

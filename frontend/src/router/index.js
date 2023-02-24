@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Registration from "@/components/pages/Registration.vue";
+import Registration from "@/pages/Registration.vue";
+import Authentication from "@/pages/Authentication.vue";
 
 Vue.use(VueRouter)
 
@@ -29,11 +30,17 @@ Vue.use(VueRouter)
 // export default router
 
 export default new VueRouter({
+  mode: 'history',
   routes: [
     {
-      path: '/',
-      name: 'registration',
+      path: '/registration',
+      name: 'Registration-Page',
       component: Registration
+    },
+    {
+      path: '/auth',
+      name: 'Authentication-Page',
+      component: Authentication
     },
   ]
 })
