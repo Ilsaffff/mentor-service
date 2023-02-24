@@ -37,9 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'mentor_app.apps.MentorAppConfig',
     'rest_framework',
-    'rest_framework.authtoken',
-    'djoser',
-    'corsheaders',
+    'frontend'
 ]
 
 MIDDLEWARE = [
@@ -50,7 +48,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'corsheaders.middleware.CorsMiddleware'
 ]
 
 ROOT_URLCONF = 'mentor_service.urls'
@@ -86,6 +83,11 @@ DATABASES = {
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
+
+CORS_ORIGIN_WHITELIST = (
+    'localhost:8000',
+    'localhost',
+)
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -127,6 +129,8 @@ AUTH_USER_MODEL = 'mentor_app.User'
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.TokenAuthentication'
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        # 'rest_framework.authentication.TokenAuthentication'
     ],
 }

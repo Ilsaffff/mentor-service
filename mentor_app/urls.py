@@ -1,4 +1,4 @@
-from django.urls import path, include, re_path
+from django.urls import path, include
 from rest_framework import routers
 from . import views
 
@@ -9,7 +9,6 @@ urlpatterns = [
     path('', include(router.urls)),
     path('onboarding/', views.OnboardingView.as_view()),
     path('registration/', views.RegistrationView.as_view()),
-    path('auth/', include('djoser.urls')),
-    re_path(r'^auth/', include('djoser.urls.authtoken')),
+    path('auth/', include('rest_framework.urls'))
 
 ]
